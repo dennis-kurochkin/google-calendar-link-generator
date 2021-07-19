@@ -10,7 +10,7 @@ const Header: React.FC = () => (
   >
     <Container
       maxW="container.lg"
-      py={5}
+      py={{ base: 4, md: 5 }}
     >
       <Heading
         as="h1"
@@ -19,7 +19,7 @@ const Header: React.FC = () => (
         Gucagen
       </Heading>
       <Text
-        fontSize="lg"
+        fontSize={{ base: 'md', md: 'lg' }}
       >
         An easy way to generate Google Calendar event creation link ✅
       </Text>

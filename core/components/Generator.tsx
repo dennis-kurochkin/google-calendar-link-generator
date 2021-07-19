@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import {
-  Box, FormControl, FormHelperText, FormLabel, Input, Textarea,
+  Box, Button, FormControl, FormHelperText, FormLabel, Input, Radio, RadioGroup, Stack, Textarea,
 } from '@chakra-ui/react'
 
+const FORM_CONTROL_MARGIN = 4
 const DEFAULT_DESC_TEXT = 'Description for your event.\nCan be multi-line, contain links and reasonable amount of text.'
 
 const Generator: React.FC = () => {
@@ -10,7 +11,8 @@ const Generator: React.FC = () => {
 
   return (
     <Box
-      py={6}
+      py={{ base: 5, md: 6 }}
+      maxWidth="container.sm"
     >
       <FormControl
         id="title"
@@ -22,7 +24,7 @@ const Generator: React.FC = () => {
       </FormControl>
       <FormControl
         id="description"
-        mt={3}
+        mt={FORM_CONTROL_MARGIN}
       >
         <FormLabel>
           Description
@@ -37,7 +39,7 @@ const Generator: React.FC = () => {
       </FormControl>
       <FormControl
         id="location"
-        mt={3}
+        mt={FORM_CONTROL_MARGIN}
       >
         <FormLabel>
           Location
@@ -50,6 +52,53 @@ const Generator: React.FC = () => {
           Can be an address or just a name of the place, most of the times Google will figure it out
         </FormHelperText>
       </FormControl>
+      <FormControl
+        id="start-date"
+        mt={FORM_CONTROL_MARGIN}
+      >
+        <FormLabel>Start date</FormLabel>
+        <Input
+          placeholder="03.03.2021"
+        />
+      </FormControl>
+      <FormControl
+        id="end-date"
+        mt={FORM_CONTROL_MARGIN}
+      >
+        <FormLabel>End date</FormLabel>
+        <Input
+          placeholder="03.03.2021"
+        />
+      </FormControl>
+      <FormControl
+        mt={FORM_CONTROL_MARGIN}
+      >
+        <FormLabel>Show event as busy or available?</FormLabel>
+        <RadioGroup
+          defaultValue="busy"
+        >
+          <Stack
+            direction="column"
+          >
+            <Radio
+              value="busy"
+            >
+              Busy
+            </Radio>
+            <Radio
+              value="available"
+            >
+              Available
+            </Radio>
+          </Stack>
+        </RadioGroup>
+      </FormControl>
+      <Button
+        colorScheme="blue"
+        mt={6}
+      >
+        Generate event link
+      </Button>
     </Box>
   )
 }

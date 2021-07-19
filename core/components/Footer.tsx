@@ -4,10 +4,11 @@ import { Box, Container, Text } from '@chakra-ui/react'
 const Footer: React.FC = () => (
   <Box
     as="footer"
+    borderTopWidth="1px"
   >
     <Container
       maxW="container.lg"
-      py="4"
+      py={{ base: 3, md: 4 }}
     >
       <Text
         textAlign="center"
