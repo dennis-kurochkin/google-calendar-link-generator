@@ -4,10 +4,19 @@ import {
 } from '@chakra-ui/react'
 
 const FORM_CONTROL_MARGIN = 4
-const DEFAULT_DESC_TEXT = 'Description for your event.\nCan be multi-line, contain links and reasonable amount of text.'
 
-const Generator: React.FC = () => {
-  const [descText, setDescText] = useState<string>(DEFAULT_DESC_TEXT)
+const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [location, setLocation] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const handleSubmit = () => {
+    const result = `text=${title}&details=${description}&location=${location}&dates=${startDate}%2F${endDate}`
+    onGetLinkParams(result)
+  }
 
   return (
     <Box
@@ -19,7 +28,9 @@ const Generator: React.FC = () => {
       >
         <FormLabel>Title</FormLabel>
         <Input
+          value={title}
           placeholder="e.g. An appointment"
+          onInput={(e: React.FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)}
         />
       </FormControl>
       <FormControl
@@ -30,12 +41,14 @@ const Generator: React.FC = () => {
           Description
         </FormLabel>
         <Textarea
-          value={descText}
-          onFocus={({ currentTarget }) => currentTarget.value === DEFAULT_DESC_TEXT && setDescText('')}
-          onBlur={({ currentTarget }) => !currentTarget.value && setDescText(DEFAULT_DESC_TEXT)}
-          onInput={({ currentTarget }) => setDescText(currentTarget.value)}
+          value={description}
+          placeholder="Description for your event"
           rows={3}
+          onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value)}
         />
+        <FormHelperText>
+          Can be multi-line, contain links and reasonable amount of text.
+        </FormHelperText>
       </FormControl>
       <FormControl
         id="location"
@@ -45,8 +58,10 @@ const Generator: React.FC = () => {
           Location
         </FormLabel>
         <Textarea
+          value={location}
           placeholder="e.g. 11 W 53rd St, New York, NY 10019, United States"
           rows={2}
+          onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setLocation(e.currentTarget.value)}
         />
         <FormHelperText>
           Can be an address or just a name of the place, most of the times Google will figure it out
@@ -58,7 +73,9 @@ const Generator: React.FC = () => {
       >
         <FormLabel>Start date</FormLabel>
         <Input
+          value={startDate}
           placeholder="03.03.2021"
+          onInput={(e: React.FormEvent<HTMLInputElement>) => setStartDate(e.currentTarget.value)}
         />
       </FormControl>
       <FormControl
@@ -67,7 +84,9 @@ const Generator: React.FC = () => {
       >
         <FormLabel>End date</FormLabel>
         <Input
+          value={endDate}
           placeholder="03.03.2021"
+          onInput={(e: React.FormEvent<HTMLInputElement>) => setEndDate(e.currentTarget.value)}
         />
       </FormControl>
       <FormControl
@@ -82,11 +101,15 @@ const Generator: React.FC = () => {
           >
             <Radio
               value="busy"
+              isChecked={busy}
+              onChange={() => setBusy(true)}
             >
               Busy
             </Radio>
             <Radio
               value="available"
+              isChecked={!busy}
+              onChange={() => setBusy(false)}
             >
               Available
             </Radio>
@@ -96,6 +119,7 @@ const Generator: React.FC = () => {
       <Button
         colorScheme="blue"
         mt={6}
+        onClick={handleSubmit}
       >
         Generate event link
       </Button>
@@ -103,4 +127,4 @@ const Generator: React.FC = () => {
   )
 }
 
-export default Generator
+export default Form

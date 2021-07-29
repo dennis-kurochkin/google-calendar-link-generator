@@ -44,6 +44,15 @@ module.exports = {
     semi: [2, 'never'],
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 0,
-    '@typescript-eslint/no-use-before-define': [2],
+    '@typescript-eslint/no-use-before-define': 2,
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'import/prefer-default-export': 0,
   },
 }
