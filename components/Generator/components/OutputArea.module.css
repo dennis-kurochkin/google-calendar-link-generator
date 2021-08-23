@@ -1,0 +1,5 @@
+.outputInput {
+    font-family: monospace;
+    cursor: copy;
+    user-select: none;
+}
