@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-  Box, Button, FormControl, FormHelperText, FormLabel, Input, Radio, RadioGroup, Stack, Textarea,
+  Box, Button, FormControl, FormHelperText, FormLabel, Input, Textarea,
 } from '@chakra-ui/react'
 
 const FORM_CONTROL_MARGIN = 4
@@ -11,11 +11,9 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
   const [location, setLocation] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
-  const [busy, setBusy] = useState(false)
 
   const handleSubmit = () => {
-    const result = `text=${title}&details=${description}&location=${location}&dates=${startDate}%2F${endDate}`
-    onGetLinkParams(result)
+    onGetLinkParams(`&text=${title}&details=${description}&location=${location}&dates=${startDate}%2F${endDate}`)
   }
 
   return (
@@ -71,7 +69,7 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
         id="start-date"
         mt={FORM_CONTROL_MARGIN}
       >
-        <FormLabel>Start date</FormLabel>
+        <FormLabel>Start date and time</FormLabel>
         <Input
           value={startDate}
           placeholder="03.03.2021"
@@ -82,39 +80,12 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
         id="end-date"
         mt={FORM_CONTROL_MARGIN}
       >
-        <FormLabel>End date</FormLabel>
+        <FormLabel>End date and time</FormLabel>
         <Input
           value={endDate}
           placeholder="03.03.2021"
           onInput={(e: React.FormEvent<HTMLInputElement>) => setEndDate(e.currentTarget.value)}
         />
-      </FormControl>
-      <FormControl
-        mt={FORM_CONTROL_MARGIN}
-      >
-        <FormLabel>Show event as busy or available?</FormLabel>
-        <RadioGroup
-          defaultValue="busy"
-        >
-          <Stack
-            direction="column"
-          >
-            <Radio
-              value="busy"
-              isChecked={busy}
-              onChange={() => setBusy(true)}
-            >
-              Busy
-            </Radio>
-            <Radio
-              value="available"
-              isChecked={!busy}
-              onChange={() => setBusy(false)}
-            >
-              Available
-            </Radio>
-          </Stack>
-        </RadioGroup>
       </FormControl>
       <Button
         colorScheme="blue"

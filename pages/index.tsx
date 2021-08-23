@@ -3,11 +3,11 @@ import Head from 'next/head'
 import {
   Container, Grid,
 } from '@chakra-ui/react'
-import Header from '@/core/components/Header'
-import Generator from '@/core/components/Generator'
-import Footer from '@/core/components/Footer'
+import Header from '@/components/Header'
+import Generator from '@/components/Generator'
+import Footer from '@/components/Footer'
 
-const Home: React.FC = () => (
+const Home = () => (
   <Grid
     templateRows="auto 1fr auto"
     h="100vh"
@@ -22,6 +22,7 @@ const Home: React.FC = () => (
     <Header />
     <Container
       maxW="container.lg"
+      paddingTop="5"
     >
       <Generator />
     </Container>
