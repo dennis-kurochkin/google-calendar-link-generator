@@ -19,7 +19,6 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
   return (
     <Box
       py={{ base: 5, md: 6 }}
-      maxWidth="container.sm"
     >
       <FormControl
         id="title"

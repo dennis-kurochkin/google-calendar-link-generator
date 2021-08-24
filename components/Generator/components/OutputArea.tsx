@@ -1,21 +1,35 @@
-import React, { SyntheticEvent } from 'react'
+import React, { useRef } from 'react'
 import {
-  Button, Input, InputGroup, InputRightElement,
+  Button, Input, InputGroup, InputRightElement, Link, useToast,
 } from '@chakra-ui/react'
-import { CopyIcon } from '@chakra-ui/icons'
+import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import styles from './OutputArea.module.css'
 
-const OutputArea = ({ value }: { value: string}) => {
-  const handleInputClick = (event: SyntheticEvent<HTMLInputElement>): void => {
-    event.currentTarget.select()
+const OutputArea = ({ value }: { value: string }) => {
+  const inputElement = useRef<HTMLInputElement>(null)
+  const toast = useToast()
+  const isEmpty = !value
+
+  const copyInputContent = (): void => {
+    inputElement?.current?.select()
     document.execCommand('copy')
+
+    toast({
+      position: 'top',
+      title: 'Link have been copied to clipboard',
+      status: 'success',
+      isClosable: true,
+      duration: 2500,
+    })
   }
 
   return (
     <InputGroup>
       <Input
-        className={styles.outputInput}
+        className={`${styles.input} ${isEmpty ? styles.inputEmpty : styles.inputFilled}`}
         value={value}
+        ref={inputElement}
+        placeholder="Your link will be here"
         size="lg"
         fontSize="sm"
         border="2px dashed"
@@ -23,19 +37,37 @@ const OutputArea = ({ value }: { value: string}) => {
         borderRadius="4px"
         height="14"
         readOnly
-        onClick={handleInputClick}
+        onClick={copyInputContent}
       />
-      <InputRightElement
-        width="4rem"
-      >
-        <Button
-          colorScheme="blue"
-          size="md"
-          mt="4"
+      {!isEmpty && (
+        <InputRightElement
+          width="7rem"
         >
-          <CopyIcon />
-        </Button>
-      </InputRightElement>
+          <Button
+            as={Link}
+            href={value}
+            isExternal
+            colorScheme="blue"
+            size="md"
+            width="10"
+            mt="4"
+            variant="outline"
+            backgroundColor="white"
+          >
+            <ExternalLinkIcon />
+          </Button>
+          <Button
+            colorScheme="blue"
+            size="md"
+            width="10"
+            mt="4"
+            ml="2"
+            onClick={copyInputContent}
+          >
+            <CopyIcon />
+          </Button>
+        </InputRightElement>
+      )}
     </InputGroup>
   )
 }

@@ -9,7 +9,7 @@ const Header: React.FC = () => (
     bg="gray.100"
   >
     <Container
-      maxW="container.lg"
+      maxW="container.md"
       py={{ base: 4, md: 5 }}
     >
       <Heading
@@ -21,7 +21,7 @@ const Header: React.FC = () => (
       <Text
         fontSize={{ base: 'md', md: 'lg' }}
       >
-        An easy way to generate Google Calendar event creation link ✅
+        An easy way to generate Google Calendar event creation link ✨
       </Text>
     </Container>
   </Box>

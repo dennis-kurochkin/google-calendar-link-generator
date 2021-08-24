@@ -7,7 +7,7 @@ const Footer: React.FC = () => (
     borderTopWidth="1px"
   >
     <Container
-      maxW="container.lg"
+      maxW="container.md"
       py={{ base: 3, md: 4 }}
     >
       <Text
