@@ -21,7 +21,7 @@ const Home = () => (
     </Head>
     <Header />
     <Container
-      maxW="container.lg"
+      maxW="container.md"
       paddingTop="5"
     >
       <Generator />

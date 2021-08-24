@@ -1,5 +1,17 @@
-.outputInput {
+.input {
     font-family: monospace;
-    cursor: copy;
     user-select: none;
+}
+
+.inputFilled {
+    cursor: copy;
+}
+
+.inputEmpty {
+    text-align: center;
+    pointer-events: none;
+}
+
+.inputEmpty::placeholder {
+    color: var(--chakra-colors-gray-800)
 }
