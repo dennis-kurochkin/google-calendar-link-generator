@@ -18,7 +18,8 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
 
   return (
     <Box
-      py={{ base: 5, md: 6 }}
+      pt={{ base: 5, md: 6 }}
+      pb="8"
     >
       <FormControl
         id="title"
@@ -44,7 +45,7 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
           onInput={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value)}
         />
         <FormHelperText>
-          Can be multi-line, contain links and reasonable amount of text.
+          Can be multi-line, contain links and reasonable amount of text
         </FormHelperText>
       </FormControl>
       <FormControl

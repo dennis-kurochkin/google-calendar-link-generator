@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import {
-  Button, Input, InputGroup, InputRightElement, Link, useToast,
+  Box, Button, Input, Link, useToast,
 } from '@chakra-ui/react'
 import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import styles from './OutputArea.module.css'
@@ -10,8 +10,8 @@ const OutputArea = ({ value }: { value: string }) => {
   const toast = useToast()
   const isEmpty = !value
 
-  const copyInputContent = (): void => {
-    inputElement?.current?.select()
+  const copyInputContent = () => {
+    inputElement.current!.select()
     document.execCommand('copy')
 
     toast({
@@ -23,52 +23,57 @@ const OutputArea = ({ value }: { value: string }) => {
     })
   }
 
+  const inputKeyPressHandler = (e: React.KeyboardEvent) => [' ', 'Enter'].includes(e.key) && copyInputContent()
+
   return (
-    <InputGroup>
+    <Box
+      display="flex"
+    >
       <Input
+        ref={inputElement}
         className={`${styles.input} ${isEmpty ? styles.inputEmpty : styles.inputFilled}`}
         value={value}
-        ref={inputElement}
         placeholder="Your link will be here"
         size="lg"
         fontSize="sm"
         border="2px dashed"
         borderColor="gray.300"
         borderRadius="4px"
-        height="14"
         readOnly
         onClick={copyInputContent}
+        onKeyPress={inputKeyPressHandler}
       />
       {!isEmpty && (
-        <InputRightElement
-          width="7rem"
+        <Box
+          display="flex"
+          ml="2"
         >
           <Button
             as={Link}
             href={value}
             isExternal
             colorScheme="blue"
-            size="md"
+            size="lg"
             width="10"
-            mt="4"
             variant="outline"
             backgroundColor="white"
+            title="Open generated calendar link in a new tab"
           >
             <ExternalLinkIcon />
           </Button>
           <Button
             colorScheme="blue"
-            size="md"
+            size="lg"
             width="10"
-            mt="4"
             ml="2"
+            title="Copy generated calendar link"
             onClick={copyInputContent}
           >
             <CopyIcon />
           </Button>
-        </InputRightElement>
+        </Box>
       )}
-    </InputGroup>
+    </Box>
   )
 }
 

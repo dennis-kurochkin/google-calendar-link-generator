@@ -15,7 +15,8 @@
     "framer-motion": "^4.1.17",
     "next": "10.x",
     "react": "17.x",
-    "react-dom": "17.x"
+    "react-dom": "17.x",
+    "react-icons": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.14",
