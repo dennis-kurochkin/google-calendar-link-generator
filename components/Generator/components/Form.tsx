@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {
   Box, Button, FormControl, FormHelperText, FormLabel, Input, Textarea,
 } from '@chakra-ui/react'
+import { useForm } from 'react-hook-form'
 
 const FORM_CONTROL_MARGIN = 4
 
@@ -12,14 +13,20 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
-  const handleSubmit = () => {
+  const {
+    register, handleSubmit, watch, formState: { errors },
+  } = useForm()
+
+  const handleInputsSubmit = () => {
     onGetLinkParams(`&text=${title}&details=${description}&location=${location}&dates=${startDate}%2F${endDate}`)
   }
 
   return (
     <Box
+      as="form"
       pt={{ base: 5, md: 6 }}
       pb="8"
+      onSubmit={handleSubmit}
     >
       <FormControl
         id="title"
@@ -90,7 +97,7 @@ const Form = ({ onGetLinkParams }: { onGetLinkParams: Function}) => {
       <Button
         colorScheme="blue"
         mt={6}
-        onClick={handleSubmit}
+        onClick={handleInputsSubmit}
       >
         Generate event link
       </Button>
