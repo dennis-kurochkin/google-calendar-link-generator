@@ -12,9 +12,13 @@
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@types/react-datepicker": "^4.1.4",
+    "date-fns": "^2.23.0",
+    "date-fns-tz": "^1.1.6",
     "framer-motion": "^4.1.17",
     "next": "10.x",
     "react": "17.x",
+    "react-datepicker": "^4.2.1",
     "react-dom": "17.x",
     "react-hook-form": "^7.13.0",
     "react-icons": "^4.2.0"

@@ -29,6 +29,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
     'react/jsx-props-no-spreading': 0,
+    'react/prop-types': 'off',
     'space-before-function-paren': [2, 'never'],
     'react/jsx-first-prop-new-line': [2, 'always'],
     'comma-dangle': [2, 'always-multiline'],
