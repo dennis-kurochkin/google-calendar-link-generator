@@ -11,6 +11,8 @@ const OutputArea = ({ value }: { value: string }) => {
   const isEmpty = !value
 
   const copyInputContent = () => {
+    if (isEmpty) return
+
     inputElement.current!.select()
     document.execCommand('copy')
 
