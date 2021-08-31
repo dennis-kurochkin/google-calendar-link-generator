@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
   Box, Button, Input, Link, useToast,
 } from '@chakra-ui/react'
@@ -26,6 +26,10 @@ const OutputArea = ({ value }: { value: string }) => {
   }
 
   const inputKeyPressHandler = (e: React.KeyboardEvent) => [' ', 'Enter'].includes(e.key) && copyInputContent()
+
+  useEffect(() => {
+    inputElement.current!.focus()
+  }, [value])
 
   return (
     <Box
